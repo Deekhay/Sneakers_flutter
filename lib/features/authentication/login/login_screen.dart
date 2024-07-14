@@ -6,6 +6,8 @@ import 'package:getwidget/types/gf_social_type.dart';
 import 'package:shoe_project/common/widget/button.dart';
 import 'package:shoe_project/utils/validators/auth.dart';
 
+import '../../../common/widget/modal.dart';
+
 class SignInPage extends StatefulWidget {
   static const String id = "sign_in_page";
 
@@ -125,24 +127,10 @@ class _SignInPageState extends State<SignInPage> {
 
   void signIn(context) {
     showModalBottomSheet(
-      scrollControlDisabledMaxHeightRatio: 1,
+      scrollControlDisabledMaxHeightRatio: 0.7,
       backgroundColor: Colors.transparent,
       context: context,
-      builder: (context) => Container(
-        height: 800,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            color: Colors.transparent,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(34), topRight: Radius.circular(34))),
-        child: Container(
-            width: 320.w,
-            height: 300.h,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(24),
-            )),
-      ),
+      builder: (context) => KModal(),
     );
     // if (_signInGlobalKey.currentState!.validate()) {
     //   final message = authController.login(
