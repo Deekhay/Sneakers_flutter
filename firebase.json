@@ -1,0 +1,21 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "nikeapp-9f478",
+          "appId": "1:761633437926:android:f1826707ff831ccc34a327",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "nikeapp-9f478",
+          "configurations": {
+            "android": "1:761633437926:android:f1826707ff831ccc34a327"
+          }
+        }
+      }
+    }
+  }
+}
