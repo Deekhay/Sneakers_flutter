@@ -1,10 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:getwidget/types/gf_social_type.dart';
 import 'package:shoe_project/common/widget/button.dart';
+import 'package:shoe_project/data/repository/authRepository.dart';
 import 'package:shoe_project/utils/validators/auth.dart';
+
+import '../../../data/services/auth_service.dart';
 
 class SignInPage extends StatefulWidget {
   static const String id = "sign_in_page";
@@ -23,7 +27,21 @@ class _SignInPageState extends State<SignInPage> {
   bool showModal = false;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        print('User is signed in!');
+      }
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    Authrepository authService = AuthService();
     return Scaffold(
       primary: true,
       body: Padding(
@@ -104,7 +122,10 @@ class _SignInPageState extends State<SignInPage> {
               SizedBox(height: 100.h),
               Column(
                 children: [
-                  MyButtonTwo(text: "Log in", onPressed: () => signIn(context)),
+                  MyButtonTwo(
+                      text: "Log in",
+                      onPressed: () => authService.signInEmail(
+                          emailController.text, passwordController.text)),
                   const SizedBox(height: 30),
                   const Text(
                     "Forgot Password",
