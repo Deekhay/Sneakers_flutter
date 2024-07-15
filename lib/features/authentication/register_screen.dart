@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
@@ -23,6 +24,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _signInGlobalKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+
   bool passwordSee = true;
   bool showModal = false;
 
@@ -67,15 +70,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 height: 100.h,
               ),
               Column(
-                children: const [
-                  MyButton(
-                    iconUrl: 'assets/images/ic_google.png',
-                    text: "Log in with Google",
+                children: [
+                  GestureDetector(
+                    onTap: () => authService.signInWithGoogle(),
+                    child: MyButton(
+                      iconUrl: 'assets/images/ic_google.png',
+                      text: "Log in with Google",
+                    ),
                   ),
                   SizedBox(height: 20),
                   MyButton(
                     iconUrl: 'assets/images/ic_facebook.png',
-                    text: "Log in with Google",
+                    text: "Log in with Facebook",
                   ),
                   SizedBox(height: 20),
                   Text(
@@ -90,6 +96,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 key: _signInGlobalKey,
                 child: Column(
                   children: [
+                    TextFormField(
+                      controller: nameController,
+                      validator: AuthValidator.isNameValid,
+                      decoration: const InputDecoration(hintText: "name"),
+                    ),
+                    SizedBox(
+                      height: 30.h,
+                    ),
                     TextFormField(
                       controller: emailController,
                       validator: AuthValidator.isEmailValid,
@@ -123,8 +137,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Column(
                 children: [
                   MyButtonTwo(
-                      text: "Log in",
-                      onPressed: () => authService.signInEmail(
+                      text: "Register",
+                      onPressed: () => authService.createUser(
                           emailController.text, passwordController.text)),
                   const SizedBox(height: 30),
                   const Text(
