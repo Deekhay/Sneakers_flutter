@@ -62,7 +62,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   onPressed: () {
                     print(_pageController.page);
                     if (_pageController.page == slideList.length - 1) {
-                      Get.toNamed(Kroutes.login);
+                      Get.toNamed(Kroutes.register);
                     } else {
                       _pageController.nextPage(
                           duration: Durations.long1, curve: Curves.decelerate);

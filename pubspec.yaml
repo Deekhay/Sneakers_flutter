@@ -38,6 +38,8 @@ dependencies:
   getwidget:
   flutter_screenutil:
   flutter_otp_text_field:
+  firebase_core:
+  firebase_auth:
 
 dev_dependencies:
   flutter_test:
