@@ -24,6 +24,8 @@ class _SignInPageState extends State<SignInPage> {
   bool passwordSee = true;
   bool showModal = false;
 
+  // FocusScope scope = FocusScope(child: child)
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
