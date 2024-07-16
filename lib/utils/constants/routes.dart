@@ -5,4 +5,5 @@ class Kroutes {
   static final String onboarding = '/onboarding';
   static final String login = '/login';
   static final String register = '/register';
+  static final String home = '/';
 }
