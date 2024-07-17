@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:shoe_project/features/authentication/login/login_screen.dart';
 import 'package:shoe_project/features/authentication/register_screen.dart';
 import 'package:shoe_project/features/onboarding/onboarding_screen.dart';
+import 'package:shoe_project/features/shop/shop_screen.dart';
 import 'package:shoe_project/features/splash_screen/splash_screen.dart';
 import 'package:shoe_project/utils/constants/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
           Kroutes.onboarding: (context) => OnboardingScreen(),
           Kroutes.login: (context) => SignInPage(),
           Kroutes.register: (context) => RegisterScreen(),
+          Kroutes.home: (context) => ShopScreen(),
         },
       ),
     );

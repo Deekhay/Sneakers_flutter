@@ -7,6 +7,7 @@ import 'package:getwidget/getwidget.dart';
 import 'package:getwidget/types/gf_social_type.dart';
 import 'package:shoe_project/common/widget/button.dart';
 import 'package:shoe_project/data/repository/authRepository.dart';
+import 'package:shoe_project/utils/constants/routes.dart';
 import 'package:shoe_project/utils/validators/auth.dart';
 
 import '../../../data/services/auth_service.dart';
@@ -72,16 +73,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () => authService.signInWithGoogle(),
+                    onTap: () async => await authService.signInWithGoogle(),
                     child: MyButton(
                       iconUrl: 'assets/images/ic_google.png',
                       text: "Log in with Google",
                     ),
                   ),
                   SizedBox(height: 20),
-                  MyButton(
-                    iconUrl: 'assets/images/ic_facebook.png',
-                    text: "Log in with Facebook",
+                  GestureDetector(
+                    onTap: () => Get.toNamed(Kroutes.home),
+                    child: MyButton(
+                      iconUrl: 'assets/images/ic_facebook.png',
+                      text: "Log in with Facebook",
+                    ),
                   ),
                   SizedBox(height: 20),
                   Text(
