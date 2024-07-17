@@ -35,12 +35,12 @@ class _ShopScreenState extends State<ShopScreen> {
           }
 
           print(snapshot.data?[0]);
-          return auth.user == null
+          return auth.getUser == null
               ? Center(
                   child: Text('Data successful ${snapshot.data?[0]["name"]}'))
               : Center(
                   child: Text(
-                      'Data successful ${snapshot.data?[0]["name"]} ${auth.user?.email}'));
+                      'Data successful ${snapshot.data?[0]["name"]} ${auth.getUser?.email}'));
         },
       ),
     ));

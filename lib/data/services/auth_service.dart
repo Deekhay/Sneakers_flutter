@@ -3,9 +3,9 @@ import 'package:shoe_project/data/repository/authRepository.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService implements Authrepository {
-  FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
-  User? user = FirebaseAuth.instance.currentUser;
+  User? get getUser => auth.currentUser;
 
   Future<void> signInEmail(String emailAddress, String password) async {
     try {
