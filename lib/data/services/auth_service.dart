@@ -3,10 +3,14 @@ import 'package:shoe_project/data/repository/authRepository.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService implements Authrepository {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  User? get getUser => auth.currentUser;
+
   Future<void> signInEmail(String emailAddress, String password) async {
     try {
-      final credential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: emailAddress, password: password);
+      final credential = await auth.signInWithEmailAndPassword(
+          email: emailAddress, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
