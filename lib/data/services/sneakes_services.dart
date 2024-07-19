@@ -2,6 +2,9 @@ import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:shoe_project/data/sample.dart';
+import 'package:shoe_project/data/services/category_model.dart';
+import 'sneakers_model.dart';
 
 class SneakesServices {
   final FirebaseFirestore db = FirebaseFirestore.instance;
@@ -9,6 +12,17 @@ class SneakesServices {
   Future<void> addToBook() async {
     await db
         .collection('Book')
+        // .withConverter(fromFirestore: fromFirestore, toFirestore: toFirestore)
+        .add({
+          "name": 'Gamers',
+        })
+        .then((value) => print("collection id is set"))
+        .onError((e, _) => print('Error writing document: $e'));
+  }
+
+  Future<void> addSneaker() async {
+    await db
+        .collection('Sneaker')
         // .withConverter(fromFirestore: fromFirestore, toFirestore: toFirestore)
         .add({
           "name": 'Gamers',
@@ -45,10 +59,64 @@ class SneakesServices {
 
   Future<List> getDataAll() async {
     try {
-      var allBooks = await db.collection("Book").get();
+      var allBooks = await db
+          .collection("Category")
+          .withConverter(
+              fromFirestore: Category.fromFirestore,
+              toFirestore: (Category category, _) => category.toFirestore())
+          .get();
+
       return allBooks.docs;
     } catch (e) {
       throw Exception("Error Occured");
     }
   }
+
+  Future<String> addSneakers(SneakersModel neaker) async {
+    try {
+      var sneakers = await db
+          .collection("Sneakers")
+          .withConverter(
+              fromFirestore: SneakersModel.fromFirestore,
+              toFirestore: (SneakersModel sneakers, _) =>
+                  sneakers.toFirestore())
+          .add(neaker);
+
+      return sneakers.id;
+    } catch (e) {
+      throw Exception("Error Occured");
+    }
+  }
+
+  Future<void> addCategory(CategoryModel neaker) async {
+    try {
+      var sneakers = await db
+          .collection("Category")
+          .doc(neaker.id)
+          .withConverter(
+              fromFirestore: CategoryModel.fromFirestore,
+              toFirestore: (CategoryModel category, _) =>
+                  category.toFirestore())
+          .set(neaker);
+    } catch (e) {
+      throw Exception("Error Occured");
+    }
+  }
+
+  Future<QuerySnapshot<CategoryModel>> getAllCategory() async {
+    try {
+      var sneakers = await db
+          .collection("Category")
+          .withConverter(
+              fromFirestore: CategoryModel.fromFirestore,
+              toFirestore: (CategoryModel category, _) =>
+                  category.toFirestore())
+          .get();
+      return sneakers;
+    } catch (e) {
+      throw Exception("Error Occured");
+    }
+  }
 }
+
+Future<void> addCategory() async {}
