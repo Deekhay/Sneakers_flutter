@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:shoe_project/data/sample.dart';
 
 class CategoryModel {
   final String? id;

@@ -1,8 +1,5 @@
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:shoe_project/data/sample.dart';
 import 'package:shoe_project/data/services/category_model.dart';
 import 'sneakers_model.dart';
 
@@ -62,8 +59,9 @@ class SneakesServices {
       var allBooks = await db
           .collection("Category")
           .withConverter(
-              fromFirestore: Category.fromFirestore,
-              toFirestore: (Category category, _) => category.toFirestore())
+              fromFirestore: CategoryModel.fromFirestore,
+              toFirestore: (CategoryModel category, _) =>
+                  category.toFirestore())
           .get();
 
       return allBooks.docs;

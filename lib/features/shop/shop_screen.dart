@@ -7,7 +7,7 @@ import 'package:shoe_project/data/services/auth_service.dart';
 import 'package:shoe_project/data/services/category_model.dart';
 import 'package:shoe_project/data/services/sneakers_model.dart';
 import 'package:shoe_project/data/services/sneakes_services.dart';
-import 'package:shoe_project/features/shop/createCategory.dart';
+import 'package:shoe_project/features/shop/sneaker_detail/sneaker_detail_screen.dart';
 
 class ShopScreen extends StatefulWidget {
   const ShopScreen({Key? key}) : super(key: key);
@@ -35,81 +35,7 @@ class _ShopScreenState extends State<ShopScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SingleChildScrollView(
-      child: Container(
-          child: Column(
-        children: [
-          SizedBox(
-            height: 40,
-          ),
-          Text("Nike shoes"),
-          GFTextField(
-            controller: _controller,
-          ),
-          Text("Timberland shoes"),
-          GFTextField(
-            controller: _controller1,
-          ),
-          Text("Sharp shoes"),
-          GFTextField(
-            controller: _controller2,
-          ),
-          FutureBuilder(
-            future: _querySnapshot,
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return GFLoader();
-              }
-              print(snapshot.data!.docs);
-              var catLuist = snapshot.data!.docs;
-
-              return GFDropdown(
-                  value: cat.isEmpty ? catLuist[0].id : cat,
-                  items: List.generate(
-                    catLuist.length,
-                    (value) => DropdownMenuItem(
-                      child: Text(catLuist[value].id),
-                      value: catLuist[value].id,
-                    ),
-                  ),
-                  onChanged: (ob) {
-                    setState(() {
-                      cat = ob!;
-                    });
-                  });
-            },
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          GFButton(
-            onPressed: () async {
-              var model = SneakersModel(
-                  name: _controller.text,
-                  description: _controller1.text,
-                  price: int.parse(_controller2.text),
-                  catergory: cat);
-
-              var res = await seve.addSneakers(model);
-
-              Get.showSnackbar(GetSnackBar(
-                duration: Duration(seconds: 3),
-                title: "Model Saved",
-                message: "Model Saved with is $res",
-              ));
-            },
-            child: Text("Create Category"),
-          ),
-          GFButton(
-            onPressed: () {
-              Get.to(() => CreateCategory());
-            },
-            child: Text("To creat Category"),
-          )
-        ],
-      )),
-    ));
+    return Scaffold(body: SneakerDetailScreen());
   }
 }
 
