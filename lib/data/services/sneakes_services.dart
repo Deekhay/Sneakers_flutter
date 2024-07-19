@@ -7,6 +7,7 @@ class SneakesServices {
   Future<void> addToBook() async {
     await db
         .collection('Book')
+        // .withConverter(fromFirestore: fromFirestore, toFirestore: toFirestore)
         .add({
           "name": 'Gamers',
         })
@@ -40,16 +41,12 @@ class SneakesServices {
     );
   }
 
-  Future<void> getDataAll() async {
-    db.collection("Book").get().then(
-      (querySnapshot) {
-        print("Successfully completed");
-        // print("${querySnapshot.data()}");
-        for (var docSnapshot in querySnapshot.docs) {
-          print('${docSnapshot.id} => ${docSnapshot.data()}');
-        }
-      },
-      onError: (e) => print("Error completing: $e"),
-    );
+  Future<List> getDataAll() async {
+    try {
+      var allBooks = await db.collection("Book").get();
+      return allBooks.docs;
+    } catch (e) {
+      throw Exception("Error Occured");
+    }
   }
 }

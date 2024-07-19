@@ -22,8 +22,7 @@ class AuthService implements Authrepository {
 
   Future<void> createUser(String emailAddress, String password) async {
     try {
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final credential = await auth.createUserWithEmailAndPassword(
         email: emailAddress,
         password: password,
       );
@@ -53,6 +52,6 @@ class AuthService implements Authrepository {
     );
 
     // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    return await auth.signInWithCredential(credential);
   }
 }
