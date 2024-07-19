@@ -23,19 +23,12 @@ class SneakesServices {
         .then((value) => print("collection id is set"))
         .onError((e, _) => print('Error writing document: $e'));
   }
-  // Update one field, creating the document if it does not already exist.
-  // final data = {"capital": true};
-
-// db.collection("cities").doc("BJ").set(data, SetOptions(merge: true));
 
   Future<void> getData() async {
     db.collection("Book").doc("Harrypotter").get().then(
       (querySnapshot) {
         print("Successfully completed");
         print("${querySnapshot.data()}");
-        // for (var docSnapshot in querySnapshot.docs) {
-        //   print('${docSnapshot.id} => ${docSnapshot.data()}');
-        // }
       },
       onError: (e) => print("Error completing: $e"),
     );
