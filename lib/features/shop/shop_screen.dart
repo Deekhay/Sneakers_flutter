@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shoe_project/data/services/sneakes_services.dart';
+import 'package:shoe_project/features/shop/sneaker_detail/sneaker_detail_screen.dart';
 
 class ShopScreen extends StatefulWidget {
   const ShopScreen({Key? key}) : super(key: key);
@@ -24,6 +25,6 @@ class _ShopScreenState extends State<ShopScreen> {
   Widget build(BuildContext context) {
     seve.getData();
 
-    return Scaffold(body: Container());
+    return Scaffold(body: SneakerDetailScreen());
   }
 }
