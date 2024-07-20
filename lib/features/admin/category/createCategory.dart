@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:shoe_project/features/shop/shop_screen.dart';
 
-import '../../data/services/category_model.dart';
-import '../../data/services/sneakes_services.dart';
+import '../../../data/model/category_model.dart';
+import '../../../data/services/sneakes_services.dart';
 
 class CreateCategory extends StatefulWidget {
   const CreateCategory({Key? key}) : super(key: key);

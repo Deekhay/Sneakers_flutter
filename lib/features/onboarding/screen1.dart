@@ -17,7 +17,7 @@ class _Screen1State extends State<Screen1> {
           child: Column(
             children: [
               Row(
-                children: [Image.asset('assets/images/Screen1/')],
+                children: [Image.asset('assets/images/Screen1/V1.png')],
               ),
               Image.asset('assets/images/image1.png'),
             ],

@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:shoe_project/data/services/category_model.dart';
-import 'sneakers_model.dart';
+import 'package:shoe_project/data/model/category_model.dart';
+import 'package:shoe_project/data/services/upload_services.dart';
+import '../model/sneakers_model.dart';
 
 class SneakesServices {
   final FirebaseFirestore db = FirebaseFirestore.instance;
@@ -76,6 +77,29 @@ class SneakesServices {
       return sneakers.id;
     } catch (e) {
       throw Exception("Error Occured");
+    }
+  }
+
+  Future<String> addSneakersWithImage(
+      SneakersModel neaker, filePath, fileName) async {
+    print(filePath);
+    try {
+      var downloadurl = await UpLoadService()
+          .upLoadFile(filePath, fileName, neaker.catergory!);
+
+      print(downloadurl);
+      neaker.images?.add(downloadurl);
+      var sneakers = await db
+          .collection("Sneakers")
+          .withConverter(
+              fromFirestore: SneakersModel.fromFirestore,
+              toFirestore: (SneakersModel sneakers, _) =>
+                  sneakers.toFirestore())
+          .add(neaker);
+      print((await sneakers.get()).data());
+      return sneakers.id;
+    } catch (e) {
+      throw Exception(e);
     }
   }
 

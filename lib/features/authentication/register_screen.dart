@@ -7,6 +7,7 @@ import 'package:getwidget/getwidget.dart';
 import 'package:getwidget/types/gf_social_type.dart';
 import 'package:shoe_project/common/widget/button.dart';
 import 'package:shoe_project/data/repository/authRepository.dart';
+import 'package:shoe_project/features/admin/admin.dart';
 import 'package:shoe_project/utils/constants/routes.dart';
 import 'package:shoe_project/utils/validators/auth.dart';
 
@@ -137,7 +138,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 100.h),
+              SizedBox(height: 80.h),
               Column(
                 children: [
                   MyButtonTwo(
@@ -151,6 +152,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       fontWeight: FontWeight.w500,
                       fontSize: 18,
                       color: Color(0xFF265AE8),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(() => Admin());
+                    },
+                    child: const Text(
+                      "To admin",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18,
+                        color: Color(0xFF265AE8),
+                      ),
                     ),
                   ),
                 ],
